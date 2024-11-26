@@ -1,0 +1,29 @@
+server:
+  port: ${SERVER_PORT:8082}
+
+spring:
+  application:
+    name: ms-payments
+
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:54321}/${POSTGRES_NAME:mspaymentsdb}
+    username: ${POSTGRES_USERNAME:MS_ORDERS}
+    password: ${POSTGRES_PASSWORD:MS_ORDERS}
+    driver-class-name: org.postgresql.Driver
+    jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: ${SHOW_SQL:true}
+      open-in-view: false
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  data:
+    mongodb:
+      host: ${MONGODB_HOST:localhost}
+      port: ${MONGODB_PORT:27017}
+      database: ${MONGODB_NAME:mspaymentsmongodb}
+      auto-index-creation: true
+
+  flyway:
+    enable: true
+    baseline_on_migrate: false
