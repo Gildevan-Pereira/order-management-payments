@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: order-management-payments-postgres
+    ports:
+      - '54321:5432'
+    environment:
+      POSTGRES_DB: mspaymentsdb
+      POSTGRES_USER: MS_PAYMENTS
+      POSTGRES_PASSWORD: MS_PAYMENTS
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mongo:
+    image: 'mongo:7.0.9'
+    container_name: order-management-payments-mongo
+    ports:
+      - '27018:27017'
+    environment:
+      MONGO_INITDB_DATABASE: mspaymentsmongodb
+    volumes:
+      - mongo_data:/data/db/payments
+
+#  rabbitmq:
+#    image: 'rabbitmq:3.9-management-alpine'
+#    container_name: rabbitmq
+#    ports:
+#      - '5672:5672'
+#      - '15672:15672'
+#    environment:
+#      RABBITMQ_DEFAULT_USER: guest
+#      RABBITMQ_DEFAULT_PASS: guest
+#    volumes:
+#        - rabbitmq_data:/var/lib/rabbitmq
+
+volumes:
+  postgres_data:
+  mongo_data:
+#  rabbitmq_data:
