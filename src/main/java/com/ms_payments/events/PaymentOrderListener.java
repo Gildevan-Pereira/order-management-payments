@@ -15,11 +15,11 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class CreatedOrderListener extends BaseListener {
+public class PaymentOrderListener extends BaseListener {
 
     private final PaymentOrderService paymentOrderService;
 
-    protected CreatedOrderListener(
+    protected PaymentOrderListener(
             PaymentOrderService paymentOrderService,
             RabbitTemplate rabbitTemplate,
             @Value("${spring.rabbitmq.exchanges.order_management_events}")
@@ -42,15 +42,15 @@ public class CreatedOrderListener extends BaseListener {
         try {
             PaymentRequestDto requestDto = JsonParserUtil.fromBytes(message.getBody(), PaymentRequestDto.class);
 
-            log.info("CreatedOrderListener.listen - Data to fetch payment received | data: {}", requestDto);
+            log.info("PaymentOrderListener.listen - Data to fetch payment received | data: {}", requestDto);
 
             paymentOrderService.savePayment(requestDto);
 
         } catch (InternalException | BusinessException e) {
-            log.error("CreatedOrderListener.listen - An error has occurred | error: {}", e.getMessage(), e);
+            log.error("PaymentOrderListener.listen - An error has occurred | error: {}", e.getMessage(), e);
             super.sendToDead(message);
         } catch (Exception e) {
-            log.error("CreatedOrderListener.listen - An error has occurred | error: {}", e.getMessage(), e);
+            log.error("PaymentOrderListener.listen - An error has occurred | error: {}", e.getMessage(), e);
             super.sendToRetry(message);
         }
     }

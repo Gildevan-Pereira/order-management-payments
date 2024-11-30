@@ -9,6 +9,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -27,7 +28,7 @@ public class PaymentsEntity extends BaseEntity{
     private Integer orderId;
 
     @Column(name = "order_date")
-    private String orderDate;
+    private LocalDateTime orderDate;
 
     @Column(name = "client_cpf")
     private String clientCpf;
