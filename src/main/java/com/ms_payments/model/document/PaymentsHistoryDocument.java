@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.cglib.core.Local;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -28,6 +29,7 @@ public class PaymentsHistoryDocument {
 
     private LocalDateTime orderDate;
 
+    @CreatedDate
     private LocalDateTime createdAt;
 
     private LocalDateTime paymentRegisterDate;
