@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class FetchPaymentRabbitMQConfig {
+public class PaymentRabbitMQConfig {
 
     private final String exchange;
     private final String routingKey;
@@ -14,7 +14,7 @@ public class FetchPaymentRabbitMQConfig {
     private final String retryQueue;
     private final String deadQueue;
 
-    public FetchPaymentRabbitMQConfig(
+    public PaymentRabbitMQConfig(
             @Value("${spring.rabbitmq.exchanges.order_management_events}") String exchange,
             @Value("${spring.rabbitmq.routing_keys.created_order_routing_key}") String routingKey,
             @Value("${spring.rabbitmq.queues.fetch_payment.queue}") String queue,

@@ -12,7 +12,7 @@ public class PaymentsEntityMapper {
                 .orderId(dto.getOrderId())
                 .orderDate(dto.getOrderDate())
                 .clientCpf(dto.getClientCpf())
-                .cardNumber(dto.getCardNumber())
+//                .cardNumber(dto.getCardNumber())
                 .amount(dto.getAmount())
                 .status(OrderStatusEnum.valueOf(dto.getStatus()))
                 .build();

@@ -5,26 +5,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentRequestDto implements Serializable {
+public class CreatePaymentRequestDto {
 
     private Integer orderId;
 
-    private LocalDateTime orderDate;
-
     private String clientCpf;
 
+    private String cardNumber;
+
     private BigDecimal amount;
-
-    private String status;
-
-    private CardDto cardDto;
 
 }

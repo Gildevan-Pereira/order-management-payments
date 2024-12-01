@@ -2,7 +2,7 @@ package com.ms_payments.service;
 
 import com.ms_payments.exception.BusinessException;
 import com.ms_payments.messages.MessageEnum;
-import com.ms_payments.model.dto.request.FetchPaymentRequestDto;
+import com.ms_payments.model.dto.request.CreatePaymentRequestDto;
 import com.ms_payments.model.dto.request.PaymentRequestDto;
 import com.ms_payments.model.dto.response.ProcessedPaymentResponseDto;
 import com.ms_payments.model.entity.PaymentsEntity;
@@ -33,33 +33,31 @@ public class PaymentOrderService {
     public void savePayment(PaymentRequestDto dto) {
         PaymentsEntity paymentsEntity = PaymentsEntityMapper.fromRequest(dto);
 
-        var fetchPaymentDto = FetchPaymentRequestDto.builder()
+//        TODO: Definir Status do pedido antes de salvar
+        var entitySaved = paymentsRepository.save(paymentsEntity);
+
+        var processPayment = CreatePaymentRequestDto.builder()
                                         .orderId(dto.getOrderId())
                                         .clientCpf(dto.getClientCpf())
-                                        .cardNumber(dto.getCardNumber())
+//                TODO: Mapear CardDto na request e na entidade
                                         .amount(dto.getAmount())
                                         .build();
 
-        var paymentResponse = fetchPayments(fetchPaymentDto);
+        var paymentResponse = processPayment(processPayment);
 
 //      TODO: Corrigir essa lógica quando o gateway for implementado
         if (!paymentResponse.getCode().equals("1")) {
             throw new BusinessException(MessageEnum.GENERIC_ERROR, MessageEnum.GENERIC_ERROR.getCode(), HttpStatus.UNAUTHORIZED);
         }
 
-        var entitySaved = paymentsRepository.save(paymentsEntity);
-        log.info("PaymentOrderService.savePayment - Payment saved successful | data: {}", entitySaved);
-
-        var document = PaymentsEntityMapper.toDocumentFromEntity(entitySaved);
-
-        paymentsHistoryRepository.save(document);
-        log.info("PaymentOrderService.savePayment - Payment history saved successful | data: {}", document);
-
+        var entitySaved2 = paymentsRepository.save(entitySaved);
+        log.info("PaymentOrderService.savePayment - Payment saved successful | data: {}", entitySaved2);
 
     }
 
 //    TODO: Corrigir lógica para o gateway
-    public ProcessedPaymentResponseDto fetchPayments(FetchPaymentRequestDto dto) {
+//    TODO: Criar lógica de requisição HTTP com OpenFeign
+    public ProcessedPaymentResponseDto processPayment(CreatePaymentRequestDto dto) {
 
         String url = API_URL + "/v1/oauth2/token";
         HttpHeaders headers = new HttpHeaders();

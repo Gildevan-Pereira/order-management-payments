@@ -13,14 +13,18 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FetchPaymentRequestDto {
+public class CardDto implements Serializable {
 
-    private Integer orderId;
+    private String holderName;
 
-    private String clientCpf;
+    private String number;
 
-    private String cardNumber;
+    private String brand;
 
-    private BigDecimal amount;
+    private String cvv;
+
+    private String type;
+
+    private String expirationDate;
 
 }
