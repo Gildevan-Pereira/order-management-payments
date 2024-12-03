@@ -17,8 +17,8 @@ public class CreatePaymentRequestDto {
 
     private String clientCpf;
 
-    private String cardNumber;
-
     private BigDecimal amount;
+
+    private CardDto card;
 
 }

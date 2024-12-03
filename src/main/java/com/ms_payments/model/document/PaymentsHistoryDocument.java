@@ -1,12 +1,11 @@
 package com.ms_payments.model.document;
 
-import com.ms_payments.model.enums.OrderStatusEnum;
+import com.ms_payments.model.enums.PaymentStatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.cglib.core.Local;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -40,7 +39,7 @@ public class PaymentsHistoryDocument {
 
     private BigDecimal amount;
 
-    private OrderStatusEnum status;
+    private PaymentStatusEnum status;
 
     private String receiptUrl;
 }

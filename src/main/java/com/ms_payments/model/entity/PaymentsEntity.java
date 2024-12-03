@@ -1,6 +1,6 @@
 package com.ms_payments.model.entity;
 
-import com.ms_payments.model.enums.OrderStatusEnum;
+import com.ms_payments.model.enums.PaymentStatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,7 +41,7 @@ public class PaymentsEntity extends BaseEntity{
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private OrderStatusEnum status;
+    private PaymentStatusEnum status;
 
     @Column(name = "receipt_url")
     private String receiptUrl;
