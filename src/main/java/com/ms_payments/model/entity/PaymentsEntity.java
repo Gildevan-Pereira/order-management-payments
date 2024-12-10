@@ -33,8 +33,23 @@ public class PaymentsEntity extends BaseEntity{
     @Column(name = "client_cpf")
     private String clientCpf;
 
+    @Column(name = "card_holder_name")
+    private String cardHolderName;
+
     @Column(name = "card_number")
     private String cardNumber;
+
+    @Column(name = "card_brand")
+    private String cardBrand;
+
+    @Column(name = "card_cvv")
+    private String cardCvv;
+
+    @Column(name = "card_type")
+    private String cardType;
+
+    @Column(name = "card_expiration_date")
+    private String cardExpirationDate;
 
     @Column(name = "amount")
     private BigDecimal amount;
