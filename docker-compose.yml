@@ -3,40 +3,19 @@ version: '3.8'
 services:
   postgres:
     image: 'postgres:latest'
-    container_name: order-management-postgres
+    container_name: order-management-payments-postgres
     ports:
-      - '5432:5432'
+      - '54321:5432'
     environment:
       POSTGRES_DB: order_management_db
       POSTGRES_USER: order_management
       POSTGRES_PASSWORD: order_management
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $$POSTGRES_DB -U $$POSTGRES_USER" ]
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init-scripts:/docker-entrypoint-initdb.d
-  #TODO:
-  mongo:
-    image: 'mongo:7.0.9'
-    container_name: order-management-payments-mongo
-    ports:
-      - '27018:27017'
-    environment:
-      MONGO_INITDB_DATABASE: mspaymentsmongodb
-    volumes:
-      - mongo_data:/data/db/payments
-
-#  rabbitmq:
-#    image: 'rabbitmq:3.9-management-alpine'
-#    container_name: rabbitmq
-#    ports:
-#      - '5672:5672'
-#      - '15672:15672'
-#    environment:
-#      RABBITMQ_DEFAULT_USER: guest
-#      RABBITMQ_DEFAULT_PASS: guest
-#    volumes:
-#        - rabbitmq_data:/var/lib/rabbitmq
 
 volumes:
   postgres_data:
   mongo_data:
-#  rabbitmq_data:

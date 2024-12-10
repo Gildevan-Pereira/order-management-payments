@@ -1,5 +1,5 @@
 -- Criar usuário adicional
-CREATE USER MS_PAYMENTS WITH PASSWORD 'MS_PAYMENTS';
+CREATE USER ms_payments WITH PASSWORD 'ms_payments';
 
 -- Conceder privilégios ao usuário
-GRANT ALL PRIVILEGES ON DATABASE mspaymentsdb TO MS_PAYMENTS;
+GRANT ALL PRIVILEGES ON DATABASE order_management_db TO ms_payments;
