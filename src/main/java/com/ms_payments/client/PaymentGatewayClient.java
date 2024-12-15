@@ -4,12 +4,13 @@ import com.ms_payments.model.dto.request.CreatePaymentRequestDto;
 import com.ms_payments.model.dto.response.ProcessedPaymentResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(name = "paymentGateway", url = "http://localhost:3000/api")
+@FeignClient(value = "paymentGateway", url = "http://localhost:3000/api")
 public interface PaymentGatewayClient {
 
-    @PostMapping("/payment")
+    @RequestMapping(method = RequestMethod.POST, value = "/payments")
     ResponseEntity<ProcessedPaymentResponseDto> processPayment(@RequestBody CreatePaymentRequestDto paymentRequest);
 }

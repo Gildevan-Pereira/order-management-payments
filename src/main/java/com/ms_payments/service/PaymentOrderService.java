@@ -41,7 +41,7 @@ public class PaymentOrderService {
 
         var paymentResponse = processPayment(processPaymentDto);
 
-        if (!paymentResponse.getCode().equals(10)) {
+        if (paymentResponse.getCode() == 10) {
             throw new BusinessException(MessageEnum.GENERIC_ERROR, MessageEnum.GENERIC_ERROR.getCode(), HttpStatus.UNAUTHORIZED);
         }
 
