@@ -6,9 +6,9 @@ spring:
     name: ms-payments
 
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:54321}/${POSTGRES_NAME:mspaymentsdb}
-    username: ${POSTGRES_USERNAME:MS_PAYMENTS}
-    password: ${POSTGRES_PASSWORD:MS_PAYMENTS}
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:54321}/${POSTGRES_NAME:order_management_db}
+    username: ${POSTGRES_USERNAME:order_management}
+    password: ${POSTGRES_PASSWORD:order_management}
     driver-class-name: org.postgresql.Driver
     jpa:
       hibernate:
@@ -16,13 +16,6 @@ spring:
       show-sql: ${SHOW_SQL:true}
       open-in-view: false
       database-platform: org.hibernate.dialect.PostgreSQLDialect
-
-  data:
-    mongodb:
-      host: ${MONGODB_HOST:localhost}
-      port: ${MONGODB_PORT:27018}
-      database: ${MONGODB_NAME:mspaymentsmongodb}
-      auto-index-creation: true
 
   flyway:
     enable: true
