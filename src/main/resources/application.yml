@@ -28,7 +28,7 @@ spring:
     password: ${RABBIT_PASSWORD:guest}
     max_retry: 3
     queues:
-      fetch_payment:
+      order_payment:
         queue: order_management_payments_created_order_queue
         retry_queue: order_management_payments_created_order_retry_queue
         dead_queue: order_management_payments_created_order_dead_queue

@@ -17,9 +17,9 @@ public class PaymentRabbitMQConfig {
     public PaymentRabbitMQConfig(
             @Value("${spring.rabbitmq.exchanges.order_management_events}") String exchange,
             @Value("${spring.rabbitmq.routing_keys.created_order_routing_key}") String routingKey,
-            @Value("${spring.rabbitmq.queues.fetch_payment.queue}") String queue,
-            @Value("${spring.rabbitmq.queues.fetch_payment.retry_queue}") String retryQueue,
-            @Value("${spring.rabbitmq.queues.fetch_payment.dead_queue}") String deadQueue
+            @Value("${spring.rabbitmq.queues.order_payment.queue}") String queue,
+            @Value("${spring.rabbitmq.queues.order_payment.retry_queue}") String retryQueue,
+            @Value("${spring.rabbitmq.queues.order_payment.dead_queue}") String deadQueue
     ) {
         this.exchange = exchange;
         this.routingKey = routingKey;

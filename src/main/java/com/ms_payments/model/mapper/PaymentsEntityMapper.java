@@ -7,9 +7,6 @@ import com.ms_payments.model.dto.request.UpdateOrderRequestDto;
 import com.ms_payments.model.entity.PaymentsEntity;
 import com.ms_payments.model.enums.PaymentStatusEnum;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 public class PaymentsEntityMapper {
 
     public static PaymentsEntity fromRequestToEntity(PaymentRequestDto dto) {

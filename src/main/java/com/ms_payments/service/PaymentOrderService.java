@@ -4,6 +4,7 @@ import com.ms_payments.client.PaymentGatewayClient;
 import com.ms_payments.events.PaymentSlipPublisher;
 import com.ms_payments.events.UpdateOrderPublisher;
 import com.ms_payments.exception.BusinessException;
+import com.ms_payments.featureflag.RedisFeatureFlagService;
 import com.ms_payments.messages.MessageEnum;
 import com.ms_payments.model.dto.request.CreatePaymentRequestDto;
 import com.ms_payments.model.dto.request.PaymentRequestDto;
@@ -27,6 +28,7 @@ public class PaymentOrderService {
     private final PaymentGatewayClient paymentGatewayClient;
     private final UpdateOrderPublisher updateOrderPublisher;
     private final PaymentSlipPublisher paymentSlipPublisher;
+    private final RedisFeatureFlagService featureFlagService;
 
 
     @Transactional
@@ -55,7 +57,12 @@ public class PaymentOrderService {
         var paymentSlipDto = PaymentsEntityMapper.fromEntityToPaymentSlipPublisher(entitySaved2);
 
         updateOrderPublisher.send(updateOrderDto);
-        paymentSlipPublisher.send(paymentSlipDto);
+
+        boolean enabled = featureFlagService.isFeatureEnabled("sendToS3");
+
+        if (enabled) {
+            paymentSlipPublisher.send(paymentSlipDto);
+        }
     }
 
     public ProcessedPaymentResponseDto processPayment(CreatePaymentRequestDto dto) {

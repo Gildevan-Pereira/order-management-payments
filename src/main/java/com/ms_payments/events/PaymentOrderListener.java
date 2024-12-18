@@ -24,9 +24,9 @@ public class PaymentOrderListener extends BaseListener {
             RabbitTemplate rabbitTemplate,
             @Value("${spring.rabbitmq.exchanges.order_management_events}")
             String exchange,
-            @Value("${spring.rabbitmq.queues.fetch_payment.retry_queue}")
+            @Value("${spring.rabbitmq.queues.order_payment.retry_queue}")
             String retryRoutingKey,
-            @Value("${spring.rabbitmq.queues.fetch_payment.dead_queue}")
+            @Value("${spring.rabbitmq.queues.order_payment.dead_queue}")
             String deadRoutingKey,
             @Value("${spring.rabbitmq.max_retry}")
             Integer maxRetry) {
@@ -36,7 +36,7 @@ public class PaymentOrderListener extends BaseListener {
     }
 
     @Override
-    @RabbitListener(queues = "${spring.rabbitmq.queues.fetch_payment.queue}")
+    @RabbitListener(queues = "${spring.rabbitmq.queues.order_payment.queue}")
     public void listen(Message message) {
 
         try {
