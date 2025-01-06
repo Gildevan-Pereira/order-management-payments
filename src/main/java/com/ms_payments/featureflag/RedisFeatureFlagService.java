@@ -1,15 +1,22 @@
 package com.ms_payments.featureflag;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 
 @Service
 public class RedisFeatureFlagService implements FeatureFlag {
 
-    private Jedis redisClient;
-    private String redisNamespace;
+    private final Jedis redisClient;
+    private final String redisNamespace;
 
-    public RedisFeatureFlagService(String redisHost, int redisPort, String namespace) {
+    public RedisFeatureFlagService(
+            @Value("${spring.redis.host}")
+            String redisHost,
+            @Value("${spring.redis.port}")
+            int redisPort,
+            @Value("${spring.redis.namespace}")
+            String namespace) {
         this.redisClient = new Jedis(redisHost, redisPort);
         this.redisNamespace = namespace;
     }
